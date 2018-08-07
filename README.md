@@ -16,14 +16,14 @@ CLIENT USAGE
 import cdn_api_client
 
 client = cdn_api_client.CDNsunCdnApiClient({ 'username': 'YOUR_API_USERNAME',
-                                                     'password': 'YOUR_API_PASSWORD' })
+                                             'password': 'YOUR_API_PASSWORD' })
 ```
 
 * Get CDN service reports (https://cdnsun.com/knowledgebase/api/documentation/res/cdn/act/reports)
 ```
 response = client.get({ 'url': 'cdns/ID/reports',
                         'data': { 
-                            'type': 'GB',
+                            'type':   'GB',
                             'period': '4h'
                         }
                       })

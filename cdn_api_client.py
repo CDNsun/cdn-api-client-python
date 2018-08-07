@@ -140,17 +140,22 @@ class CDNsunCdnApiClient(object):
         response_error = ''
         try:
             c.perform()
-            response_info_str = self._get_response_info_line(c)
         except pycurl.error:
             # If have an issue with errstr() then there is also errstr_raw()
             response_error = c.errstr()
+        try:
+            response_info_str = self._get_response_info_line(c)
+        except pycurl.error:
+            # If have an issue with errstr() then there is also errstr_raw()
+            if response_error == '':
+                response_error = c.errstr()
         finally:
             c.close()
 
         # Body is a string on Python 2 and a byte string on Python 3.
         # If we know the encoding, we can always decode the body and
         # end up with a Unicode string.
-        response_body = buffer.getvalue().decode("utf-8") 
+        response_body = buffer.getvalue().decode("utf-8")
 
         if not response_body or response_error:
             raise Exception('curl error. response_body: ' + response_body +
@@ -189,4 +194,3 @@ class CDNsunCdnApiClient(object):
         except AttributeError:
             pass
         return option_str_value
-                
