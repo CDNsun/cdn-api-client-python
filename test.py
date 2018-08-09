@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
     response = client.get({ 'url': 'cdns/' + str(cdn_id) + '/reports',
                             'data': { 
-                                'type': 'GB',
+                                'type':   'GB',
                                 'period': '4h'
                             }
                           })
